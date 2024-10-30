@@ -12,6 +12,25 @@ struct ContentView: View {
     @State var stopRefreshing = false
 
     var body: some View {
+        TabView {
+            nve
+                .tabItem {
+                    Label("NVE", systemImage: "rectangle.portrait.tophalf.filled")
+                }
+
+            system
+                .tabItem {
+                    Label("System", systemImage: "gear")
+                }
+
+            systemBack
+                .tabItem {
+                    Label("Back", systemImage: "chevron.left")
+                }
+        }
+    }
+
+    var nve: some View {
         NavigationViewElastic(
             content: {
                 SpacerFixed(10)
@@ -35,14 +54,9 @@ struct ContentView: View {
                                     .background(Color.gray.opacity(0.1))
                                     .cornerRadius(8)
                             }
-                            .paddingWhen(.leading, 10) {
-                                entry == Product.allCases.first
-                            }
-                            .paddingWhen(.trailing, 10) {
-                                entry == Product.allCases.last
-                            }
                         }
                     }
+                    .padding(.horizontal, 10)
                 }
                 .padding(.bottom, 10)
             },
@@ -57,6 +71,17 @@ struct ContentView: View {
             }
         )
         .refreshable(stopRefreshing: $stopRefreshing, onRefresh: {})
+        .barStyle(.bar)
+        .preferredColorScheme(.dark)
+        .background(Color(white: 0.12))
+    }
+
+    var system: some View {
+        SystemNavBar()
+    }
+
+    var systemBack: some View {
+        SystemNavBarBackButton()
     }
 }
 
@@ -78,11 +103,24 @@ struct SystemNavBar: View {
             ScrollView {
                 LazyVStack {
                     ForEach(1...100, id: \.self) { value in
-                        SampleCard(title: "\(value)")
-                            .paddingWhen(.top, 10) { value == 1 }
+                        NavigationLink {
+                            ScrollView {
+                                Color.indigo
+                                    .frame(height: UIScreen.main.bounds.height)
+                                    .overlay {
+                                        Text("Details of \(value)")
+                                            .foregroundStyle(.white)
+                                    }
+                            }
+                        } label: {
+                            SampleCard(title: "\(value)")
+                                .foregroundStyle(.white)
+                        }
+
                     }
                 }
                 .padding(.horizontal, 10)
+                .padding(.top, 10)
             }
             .navigationTitle("Title")
             .refreshable {
