@@ -15,9 +15,9 @@
 		1E0DEB972A693A9600706827 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0DEB962A693A9600706827 /* Color+Extensions.swift */; };
 		1E0DEB9A2A693B8E00706827 /* SampleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0DEB992A693B8E00706827 /* SampleCard.swift */; };
 		1E0DEB9C2A6940AD00706827 /* BlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0DEB9B2A6940AD00706827 /* BlurEffect.swift */; };
-		1E0DEB9F2A69431500706827 /* NavigationViewElastic in Frameworks */ = {isa = PBXBuildFile; productRef = 1E0DEB9E2A69431500706827 /* NavigationViewElastic */; };
-		1E7480BB2CBD55E90036CCF7 /* NavigationViewElastic in Frameworks */ = {isa = PBXBuildFile; productRef = 1E7480BA2CBD55E90036CCF7 /* NavigationViewElastic */; };
 		1E97592B2ADE798B0036CED7 /* SpacerFixed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E97592A2ADE798B0036CED7 /* SpacerFixed.swift */; };
+		1EBB50CF2CCD6F16008EEBB3 /* NavigationViewElastic in Frameworks */ = {isa = PBXBuildFile; productRef = 1EBB50CE2CCD6F16008EEBB3 /* NavigationViewElastic */; };
+		1ECF78522CD4050900850A14 /* EmbeddedNVE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ECF78512CD404FA00850A14 /* EmbeddedNVE.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +31,8 @@
 		1E0DEB992A693B8E00706827 /* SampleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCard.swift; sourceTree = "<group>"; };
 		1E0DEB9B2A6940AD00706827 /* BlurEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffect.swift; sourceTree = "<group>"; };
 		1E97592A2ADE798B0036CED7 /* SpacerFixed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpacerFixed.swift; sourceTree = "<group>"; };
+		1EBB50CD2CCD6F0C008EEBB3 /* NavigationViewElastic */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = NavigationViewElastic; path = ../NavigationViewElastic; sourceTree = SOURCE_ROOT; };
+		1ECF78512CD404FA00850A14 /* EmbeddedNVE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedNVE.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,8 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E0DEB9F2A69431500706827 /* NavigationViewElastic in Frameworks */,
-				1E7480BB2CBD55E90036CCF7 /* NavigationViewElastic in Frameworks */,
+				1EBB50CF2CCD6F16008EEBB3 /* NavigationViewElastic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,9 +67,11 @@
 		1E0DEB802A6939CF00706827 /* NavigationViewElasticExample */ = {
 			isa = PBXGroup;
 			children = (
+				1EBB50CD2CCD6F0C008EEBB3 /* NavigationViewElastic */,
 				1E0DEB982A693B7200706827 /* Components */,
 				1E0DEB932A693A4F00706827 /* Extensions */,
 				1E0DEB812A6939CF00706827 /* NavigationViewElasticExampleApp.swift */,
+				1ECF78512CD404FA00850A14 /* EmbeddedNVE.swift */,
 				1E0DEB832A6939CF00706827 /* ContentView.swift */,
 				1E0DEB852A6939D000706827 /* Assets.xcassets */,
 				1E0DEB872A6939D000706827 /* Preview Content */,
@@ -127,8 +130,7 @@
 			);
 			name = NavigationViewElasticExample;
 			packageProductDependencies = (
-				1E0DEB9E2A69431500706827 /* NavigationViewElastic */,
-				1E7480BA2CBD55E90036CCF7 /* NavigationViewElastic */,
+				1EBB50CE2CCD6F16008EEBB3 /* NavigationViewElastic */,
 			);
 			productName = NavigationViewElasticExample;
 			productReference = 1E0DEB7E2A6939CF00706827 /* NavigationViewElasticExample.app */;
@@ -159,7 +161,6 @@
 			);
 			mainGroup = 1E0DEB752A6939CF00706827;
 			packageReferences = (
-				1E7480B92CBD55E90036CCF7 /* XCRemoteSwiftPackageReference "NavigationViewElastic" */,
 			);
 			productRefGroup = 1E0DEB7F2A6939CF00706827 /* Products */;
 			projectDirPath = "";
@@ -194,6 +195,7 @@
 				1E97592B2ADE798B0036CED7 /* SpacerFixed.swift in Sources */,
 				1E0DEB822A6939CF00706827 /* NavigationViewElasticExampleApp.swift in Sources */,
 				1E0DEB972A693A9600706827 /* Color+Extensions.swift in Sources */,
+				1ECF78522CD4050900850A14 /* EmbeddedNVE.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,9 +330,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -361,9 +363,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -403,25 +405,9 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		1E7480B92CBD55E90036CCF7 /* XCRemoteSwiftPackageReference "NavigationViewElastic" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/leekurg/NavigationViewElastic";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		1E0DEB9E2A69431500706827 /* NavigationViewElastic */ = {
+		1EBB50CE2CCD6F16008EEBB3 /* NavigationViewElastic */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = NavigationViewElastic;
-		};
-		1E7480BA2CBD55E90036CCF7 /* NavigationViewElastic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1E7480B92CBD55E90036CCF7 /* XCRemoteSwiftPackageReference "NavigationViewElastic" */;
 			productName = NavigationViewElastic;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -17,6 +17,11 @@ struct ContentView: View {
                 .tabItem {
                     Label("NVE", systemImage: "rectangle.portrait.tophalf.filled")
                 }
+            
+            EmbeddedNVEView()
+                .tabItem {
+                    Label("Embedded", systemImage: "square.stack.fill")
+                }
 
             system
                 .tabItem {
@@ -72,9 +77,7 @@ struct ContentView: View {
             }
         )
         .refreshable(stopRefreshing: $stopRefreshing, onRefresh: {})
-        .preferredColorScheme(.dark)
         .nveBarStyle(.ultraThinMaterial)
-        .background(Color(white: 0.12))
     }
 
     var system: some View {
@@ -169,7 +172,7 @@ struct SystemNavBarBackButton: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .preferredColorScheme(.dark)
+//            .preferredColorScheme(.dark)
 
         SystemNavBar().previewDisplayName("System")
 
