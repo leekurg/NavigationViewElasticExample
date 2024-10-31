@@ -40,7 +40,8 @@ struct ContentView: View {
                         SampleCard(title: "\(value)")
                     }
                 }
-                .navigationElasticTitle("Title")
+                .nveTitle("Title")
+                .nveTitleDisplayMode(.inline)
                 .padding(.horizontal, 10)
             },
             subtitleContent: {
@@ -71,8 +72,8 @@ struct ContentView: View {
             }
         )
         .refreshable(stopRefreshing: $stopRefreshing, onRefresh: {})
-        .barStyle(.bar)
         .preferredColorScheme(.dark)
+        .nveBarStyle(.ultraThinMaterial)
         .background(Color(white: 0.12))
     }
 
@@ -102,7 +103,7 @@ struct SystemNavBar: View {
         NavigationView {
             ScrollView {
                 LazyVStack {
-                    ForEach(1...100, id: \.self) { value in
+                    ForEach(1...20, id: \.self) { value in
                         NavigationLink {
                             ScrollView {
                                 Color.indigo
@@ -123,6 +124,7 @@ struct SystemNavBar: View {
                 .padding(.top, 10)
             }
             .navigationTitle("Title")
+            .navigationBarTitleDisplayMode(.inline)
             .refreshable {
                 try? await Task.sleep(nanoseconds: 3 * 1_000_000_000)
             }
@@ -167,6 +169,7 @@ struct SystemNavBarBackButton: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .preferredColorScheme(.dark)
 
         SystemNavBar().previewDisplayName("System")
 
