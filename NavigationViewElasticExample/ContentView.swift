@@ -46,7 +46,6 @@ struct ContentView: View {
                     }
                 }
                 .nveTitle("Title")
-                .nveTitleDisplayMode(.inline)
                 .padding(.horizontal, 10)
             },
             subtitleContent: {
@@ -153,19 +152,16 @@ struct SystemNavBarBackButton: View {
     }
 
     var destination: some View {
-        NavigationViewElastic(
-            content: {
-                LazyVStack {
-                    ForEach(1...20, id: \.self) { value in
-                        SampleCard(title: "\(value)")
-                            .paddingWhen(.top, 10) { value == 1 }
-                    }
+        ScrollView {
+            LazyVStack {
+                ForEach(1...20, id: \.self) { value in
+                    SampleCard(title: "\(value)")
+                        .paddingWhen(.top, 10) { value == 1 }
                 }
-                .padding(.horizontal, 10)
-            },
-            leadingBarItem: { NVE.BackButton() }
-        )
-        .navigationBarHidden(true)
+            }
+            .padding(.horizontal, 10)
+        }
+        .navigationTitle("Title")
     }
 }
 
