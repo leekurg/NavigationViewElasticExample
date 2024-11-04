@@ -149,8 +149,6 @@ struct NVE3: View {
                 }
                 .padding(.top, 10)
                 .nveTitle("Third(NVE)")
-        } subtitleContent: {
-            subtitle
         } leadingBarItem: {
             leadingBar
         } trailingBarItem: {
@@ -160,21 +158,6 @@ struct NVE3: View {
         .navigationDestination(for: Route.Depth4.self) { _ in
             Regular4(path: $path)
         }
-    }
-    
-    var subtitle: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ForEach(5...8, id: \.self) { index in
-                    Text("\(index)")
-                        .padding(.horizontal, 50)
-                        .padding(.vertical, 5)
-                        .background(.gray.opacity(0.2), in: Capsule())
-                }
-            }
-            .padding(.horizontal, 10)
-        }
-        .padding(.vertical, 5)
     }
     
     var leadingBar: some View {
