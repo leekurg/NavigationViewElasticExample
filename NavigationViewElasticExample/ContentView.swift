@@ -10,6 +10,7 @@ import NavigationViewElastic
 
 struct ContentView: View {
     @State var stopRefreshing = false
+    @State var isSubtitleShowing = true
 
     var body: some View {
         TabView {
@@ -49,25 +50,30 @@ struct ContentView: View {
                 .padding(.horizontal, 10)
             },
             subtitleContent: {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 5) {
-                        ForEach(Product.allCases, id: \.self) { entry in
-                            Button(action: { stopRefreshing = true }) {
-                                Text(entry.rawValue)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 5)
-                                    .background(Color.gray.opacity(0.1))
-                                    .cornerRadius(8)
+                if isSubtitleShowing {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 5) {
+                            ForEach(Product.allCases, id: \.self) { entry in
+                                Button(action: { stopRefreshing = true }) {
+                                    Text(entry.rawValue)
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 5)
+                                        .background(Color.gray.opacity(0.1))
+                                        .cornerRadius(8)
+                                }
                             }
                         }
+                        .padding(.horizontal, 10)
                     }
-                    .padding(.horizontal, 10)
+                    .padding(.bottom, 10)
                 }
-                .padding(.bottom, 10)
             },
             leadingBarItem: { NVE.BackButton() },
             trailingBarItem: {
                 Button {
+                    withAnimation(.spring) {
+                        isSubtitleShowing.toggle()
+                    }
                 } label: {
                     Image(systemName: "heart")
                         .font(.system(size: 20, weight: .bold))
