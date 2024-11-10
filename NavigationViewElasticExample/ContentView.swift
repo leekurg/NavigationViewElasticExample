@@ -19,10 +19,10 @@ struct ContentView: View {
                     Label("NVE", systemImage: "rectangle.portrait.tophalf.filled")
                 }
             
-            EmbeddedNVEView()
-                .tabItem {
-                    Label("Embedded", systemImage: "square.stack.fill")
-                }
+//            EmbeddedNVEView()
+//                .tabItem {
+//                    Label("Embedded", systemImage: "square.stack.fill")
+//                }
 
             system
                 .tabItem {
@@ -40,7 +40,7 @@ struct ContentView: View {
         NavigationViewElastic(
             content: {
                 SpacerFixed(10)
-
+                
                 LazyVStack {
                     ForEach(1...20, id: \.self) { value in
                         SampleCard(title: "\(value)")
@@ -48,38 +48,60 @@ struct ContentView: View {
                 }
                 .nveTitle("Title")
                 .padding(.horizontal, 10)
-            },
-            subtitleContent: {
-                if isSubtitleShowing {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 5) {
-                            ForEach(Product.allCases, id: \.self) { entry in
-                                Button(action: { stopRefreshing = true }) {
-                                    Text(entry.rawValue)
-                                        .padding(.horizontal, 10)
-                                        .padding(.vertical, 5)
-                                        .background(Color.gray.opacity(0.1))
-                                        .cornerRadius(8)
+                .nveSubtitle {
+                    Group {
+                        if isSubtitleShowing {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 5) {
+                                    ForEach(Product.allCases, id: \.self) { entry in
+                                        Button(action: { stopRefreshing = true }) {
+                                            Text(entry.rawValue)
+                                                .padding(.horizontal, 10)
+                                                .padding(.vertical, 5)
+                                                .background(Color.gray.opacity(0.1))
+                                                .cornerRadius(8)
+                                        }
+                                    }
                                 }
+                                .padding(.horizontal, 10)
                             }
+                            .padding(.bottom, 10)
+                        } else {
+                            EmptyView()
                         }
-                        .padding(.horizontal, 10)
                     }
-                    .padding(.bottom, 10)
+                    .transition(.scale(scale: 0))
                 }
-            },
-            leadingBarItem: { NVE.BackButton() },
-            trailingBarItem: {
-                Button {
-                    withAnimation(.spring) {
-                        isSubtitleShowing.toggle()
+                .nveToolbar {
+                    Toolbar.Item(placement: .leading) {
+                        NVE.BackButton()
                     }
-                } label: {
-                    Image(systemName: "heart")
-                        .font(.system(size: 20, weight: .bold))
-                        .padding(.trailing, 10)
+                    
+                    Toolbar.Item(placement: .trailing) {
+                        Button {
+                            withAnimation(.spring) {
+                                isSubtitleShowing.toggle()
+                            }
+                        } label: {
+                            Image(systemName: "heart")
+                                .font(.system(size: 20, weight: .bold))
+                                .padding(.trailing, 10)
+                        }
+                    }
                 }
             }
+//            leadingBarItem: { NVE.BackButton() },
+//            trailingBarItem: {
+//                Button {
+//                    withAnimation(.spring) {
+//                        isSubtitleShowing.toggle()
+//                    }
+//                } label: {
+//                    Image(systemName: "heart")
+//                        .font(.system(size: 20, weight: .bold))
+//                        .padding(.trailing, 10)
+//                }
+//            }
         )
         .refreshable(stopRefreshing: $stopRefreshing, onRefresh: {})
         .nveBarStyle(.ultraThinMaterial)

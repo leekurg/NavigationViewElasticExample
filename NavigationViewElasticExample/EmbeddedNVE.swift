@@ -12,23 +12,7 @@ struct EmbeddedNVEView: View {
     @State var path = NavigationPath()
 
     var body: some View {
-        NavigationStack(path: $path) {
-            Regular1(path: $path)
-                .navigationTitle("System")
-        }
-        .nveConfig { config in
-            config.barCollapsedStyle = AnyShapeStyle(.ultraThinMaterial)
-        }
-        .tint(.purple)
-    }
-}
-
-// MARK: - Regular 1
-struct Regular1: View {
-    @Binding var path: NavigationPath
-    
-    var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
+        NavigationViewElastic(path: $path) {
             Color.blue.opacity(0.3)
                 .frame(height: UIScreen.main.bounds.height - 100)
                 .overlay(alignment: .top) {
@@ -41,11 +25,15 @@ struct Regular1: View {
                     }
                     .buttonStyle(.bordered)
                 }
+                .nveTitle("First")
+                .navigationDestination(for: Route.Depth1.self) { _ in
+                    Second(path: $path)
+                }
         }
-        .navigationTitle("First(system)")
-        .navigationDestination(for: Route.Depth1.self) { _ in
-            NVE2(path: $path)
+        .nveConfig { config in
+            config.barCollapsedStyle = AnyShapeStyle(.ultraThinMaterial)
         }
+        .tint(.purple)
     }
     
     var description: some View {
@@ -72,33 +60,42 @@ struct Regular1: View {
     }
 }
 
-// MARK: - NVE 2
-struct NVE2: View {
+//// MARK: - Second
+struct Second: View {
     @Binding var path: NavigationPath
     
     var body: some View {
-        NavigationViewElastic {
-            Color.brown.opacity(0.5)
-                .frame(height: UIScreen.main.bounds.height - 200)
-                .overlay {
-                    Button("To third screen") {
-                        path.append(Route.Depth3())
-                    }
-                    .buttonStyle(.bordered)
+        Color.brown.opacity(0.5)
+            .frame(height: UIScreen.main.bounds.height - 200)
+            .overlay {
+                Button("To third screen") {
+                    path.append(Route.Depth3())
                 }
-                .padding(.top, 10)
-                .nveTitle("Second(NVE)")
-        } subtitleContent: {
-            subtitle
-        } leadingBarItem: {
-            leadingBar
-        } trailingBarItem: {
-            trailingBar
-        }
-        .toolbar(.hidden, for: .navigationBar)  //important
-        .navigationDestination(for: Route.Depth3.self) { _ in
-            NVE3(path: $path)
-        }
+                .buttonStyle(.bordered)
+            }
+            .padding(.top, 10)
+            .nveTitle("Second(NVE)")
+            .nveSubtitle {
+                subtitle
+            }
+            .nveToolbar {
+                Toolbar.Item(placement: .leading) {
+                    NVE.BackButton {
+                        path.removeLast()
+                    }
+                }
+                
+                Toolbar.Item(placement: .trailing) {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "heart")
+                            .fontWeight(.bold)
+                    }
+                    .padding(5)
+                }
+            }
+            .toolbar(.hidden, for: .navigationBar)  //important
     }
     
     var subtitle: some View {
@@ -115,88 +112,72 @@ struct NVE2: View {
         }
         .padding(.vertical, 5)
     }
-    
-    var leadingBar: some View {
-        NVE.BackButton {
-            path.removeLast()
-        }
-    }
-    
-    var trailingBar: some View {
-        Button {
-            
-        } label: {
-            Image(systemName: "heart")
-                .fontWeight(.bold)
-        }
-        .padding(5)
-    }
 }
-
-// MARK: - NVE 3
-struct NVE3: View {
-    @Binding var path: NavigationPath
-    
-    var body: some View {
-        NavigationViewElastic {
-            Color.green.opacity(0.5)
-                .frame(height: UIScreen.main.bounds.height - 200)
-                .overlay {
-                    Button("To fourth screen") {
-                        path.append(Route.Depth4())
-                    }
-                    .buttonStyle(.bordered)
-                }
-                .padding(.top, 10)
-                .nveTitle("Third(NVE)")
-        } leadingBarItem: {
-            leadingBar
-        } trailingBarItem: {
-            trailingBar
-        }
-        .toolbar(.hidden, for: .navigationBar)  //important
-        .navigationDestination(for: Route.Depth4.self) { _ in
-            Regular4(path: $path)
-        }
-    }
-    
-    var leadingBar: some View {
-        NVE.BackButton {
-            path.removeLast()
-        }
-    }
-    
-    var trailingBar: some View {
-        Button {
-            
-        } label: {
-            Image(systemName: "gear")
-                .fontWeight(.bold)
-        }
-        .padding(5)
-    }
-}
-
-// MARK: - Regular 4
-struct Regular4: View {
-    @Binding var path: NavigationPath
-    
-    var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
-            Color.blue.opacity(0.3)
-                .frame(height: UIScreen.main.bounds.height - 100)
-                .overlay {
-                    Button("Pop to root") {
-                        path = NavigationPath()
-                    }
-                    .buttonStyle(.bordered)
-                    .tint(.red)
-                }
-        }
-        .navigationTitle("Fourth(system)")
-        .navigationBarTitleDisplayMode(.large)
-    }
-}
+//
+//// MARK: - NVE 3
+//struct NVE3: View {
+//    @Binding var path: NavigationPath
+//    
+//    var body: some View {
+//        NavigationViewElastic {
+//            Color.green.opacity(0.5)
+//                .frame(height: UIScreen.main.bounds.height - 200)
+//                .overlay {
+//                    Button("To fourth screen") {
+//                        path.append(Route.Depth4())
+//                    }
+//                    .buttonStyle(.bordered)
+//                }
+//                .padding(.top, 10)
+//                .nveTitle("Third(NVE)")
+//        } leadingBarItem: {
+//            leadingBar
+//        } trailingBarItem: {
+//            trailingBar
+//        }
+//        .toolbar(.hidden, for: .navigationBar)  //important
+//        .navigationDestination(for: Route.Depth4.self) { _ in
+//            Regular4(path: $path)
+//        }
+//    }
+//    
+//    var leadingBar: some View {
+//        NVE.BackButton {
+//            path.removeLast()
+//        }
+//    }
+//    
+//    var trailingBar: some View {
+//        Button {
+//            
+//        } label: {
+//            Image(systemName: "gear")
+//                .fontWeight(.bold)
+//        }
+//        .padding(5)
+//    }
+//}
+//
+//// MARK: - Regular 4
+//struct Regular4: View {
+//    @Binding var path: NavigationPath
+//    
+//    var body: some View {
+//        ScrollView(.vertical, showsIndicators: false) {
+//            Color.blue.opacity(0.3)
+//                .frame(height: UIScreen.main.bounds.height - 100)
+//                .overlay {
+//                    Button("Pop to root") {
+//                        path = NavigationPath()
+//                    }
+//                    .buttonStyle(.bordered)
+//                    .tint(.red)
+//                }
+//        }
+//        .navigationTitle("Fourth(system)")
+//        .navigationBarTitleDisplayMode(.large)
+//    }
+//}
 
 enum Route {
     struct Depth1: Hashable { }
